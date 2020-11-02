@@ -1,0 +1,168 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "skeleton-config": {
+    "global": {
+      "loading": "spin",
+      "text": {
+        "color": "#EEEEEE"
+      },
+      "image": {
+        "shape": "",
+        "color": "#EFEFEF",
+        "shapeOpposite": []
+      },
+      "button": {
+        "color": "#EFEFEF",
+        "excludes": []
+      },
+      "pseudo": {
+        "color": "#EFEFEF",
+        "shape": "circle",
+        "shapeOpposite": []
+      },
+      "excludes": [],
+      "remove": [
+        ".footer"
+      ],
+      "empty": [],
+      "hide": [],
+      "grayBlock": [
+        ".swiper-item",
+        ".scroll-view-item"
+      ],
+      "cssUnit": "rpx",
+      "decimal": 4,
+      "showNative": false,
+      "backgroundColor": "transparent",
+      "mode": "auto",
+      "templateName": "skeleton"
+    },
+    "pages": {
+      "index/index": {},
+      "pages/buyCard/index": {
+        "showNative": true
+      }
+    }
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.10.4",
+  "appid": "wxf3f81a0729754e2f",
+  "projectname": "cg_cabinet",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": 0,
+          "name": "报表",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 2,
+          "name": "测试",
+          "pathName": "pages/cs/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "我的",
+          "pathName": "pages/user/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "分账",
+          "pathName": "pages/user/markeMoney/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "饼图",
+          "pathName": "pages/pieChart/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "订单列表",
+          "pathName": "pages/orderList/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "设备",
+          "pathName": "pages/equipment/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

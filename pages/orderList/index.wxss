@@ -1,0 +1,170 @@
+/* pages/orderList/index.wxss */
+page {
+  height: 100%;
+}
+/* 日期 */
+.con {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.con .orderDate {
+  width: 250rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  border: 1px solid #c9c9c9;
+  border-radius: 30rpx;
+  background: #f8f8f8;
+}
+
+.con .orderDate picker {
+  width: 180rpx;
+  height: 100%;
+  float: left;
+  padding-left: 25rpx;
+}
+
+.con .orderDate image {
+  float: right;
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 10rpx;
+  margin-right: 10rpx;
+}
+
+.orderListWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 34rpx;
+}
+
+.orderList {
+  width: 720rpx;
+  height: 362rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 10rpx 17rpx;
+  position: relative;
+}
+
+.iconduigou1{
+  position: absolute;
+  top: 50%;
+  margin-top: -88rpx;
+  right: 20rpx;
+  font-size: 100rpx;
+  color: #62D7AC;
+}
+
+/* .orderList:last-child{
+  margin-bottom: 30rpx;
+} */
+.order {
+  width: 100%;
+  height: 100%;
+  /* padding: 10rpx; */
+  /* font-size: 32rpx; */
+}
+
+/* .order_title {
+  width: 100%;
+  height: 76rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #EAEAEA;
+}
+
+.order_status {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333333;
+  font-size: 34rpx;
+}
+
+.order_status_img {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #3662FF;
+  border-radius: 8rpx;
+}
+
+.order_status_img image {
+  width: 36rpx;
+  height: 40rpx;
+}
+
+.order_status_text {
+  margin-left: 20rpx;
+  font-size: 34rpx;
+  font-family: Hiragino Sans GB;
+  font-weight: bold;
+  color: #333333;
+}
+
+.order_money {
+  font-size: 34rpx;
+  color: #333;
+} */
+
+.order_content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 28rpx;
+}
+
+.order_detail {
+  display: flex;
+  justify-content: left;
+}
+
+.detail_name {
+  width: 160rpx;
+}
+
+.detail_content {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.iconNone {
+  display: none;
+}
+
+
+/* mask无数据 */
+/* .iconWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150rpx;
+}
+.icon {
+  font-size: 400rpx;
+  color: #3C77E4;
+}
+
+.icon_text {
+  color: #8a9219;
+} */
