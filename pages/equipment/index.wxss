@@ -27,6 +27,7 @@
   position: absolute;
   right: 16rpx;
   top: -4rpx;
+  color: #808080;
 }
 
 .equipmentWrap {

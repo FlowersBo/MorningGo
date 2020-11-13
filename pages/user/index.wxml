@@ -8,7 +8,7 @@
   <view class="userWrap">
     <view class="user">
       <view class="user_logo">
-        <image mode="aspectFit" src="{{userInfo.logoUrl}}" data-url='{{userInfo.logoUrl}}' bindtap="topic_preview">
+        <image mode="aspectFit" src="{{userInfo.logoUrl?userInfo.logoUrl:'../../resource/img/user_img.png'}}" data-url='{{userInfo.logoUrl}}' bindtap="topic_preview">
         </image>
       </view>
       <view class="userInfo">

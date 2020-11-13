@@ -54,13 +54,13 @@ Page({
       pagesize: that.data.pageSize,
       pageindex: current,
       id: wx.getStorageSync('userID'),
-      deviceno: serchContent
+      searchStr: serchContent
     }
     try {
       const res = await mClient.wxGetRequest(api.DeviceList, data);
       console.log("设备列表", res);
       if (res.data.code == '200') {
-        let deviceList = res.data.data.data;
+        let deviceList = res.data.data.list;
         console.log("设备列表", deviceList);
         if (deviceList) {
           if (deviceList.length >= 10) {
@@ -182,34 +182,24 @@ Page({
         'pull.pullText': '正在刷新',
         'push.pullText': '',
       })
-      const p1 = that.deviceListFn(current);
-      // const p2 = that.device_signalListFn(current);
-      // console.log(p1)
-      // console.log(p2)
-      // mClient.myPromiseall(p1, p2).then(v => {
-      //   console.log(v)
-      // }).catch(e => {
-      //   console.log(e)
-      // })
-
-
-
+      that.deviceListFn(current);
       console.log('当前orderList', Boolean(that.data.deviceList));
       console.log(that.data.deviceList.length > 0)
       setTimeout(() => {
-        if (that.data.deviceList.length > 0) {
+        // if (that.data.deviceList.length > 0) {
           that.setData({
             'pull.loading': '../../resource/img/finish.png',
             'pull.pullText': '刷新完成',
-            'pull.isLoading': false
+            'pull.isLoading': false,
+            serchContent: ''
           })
-        } else {
-          that.setData({
-            'pull.loading': '/resource/img/finish.png',
-            'pull.pullText': '刷新失败',
-            'pull.isLoading': false
-          })
-        }
+        // }else {
+        //   that.setData({
+        //     'pull.loading': '/resource/img/finish.png',
+        //     'pull.pullText': '刷新完成',
+        //     'pull.isLoading': false
+        //   })
+        // }
       }, 1500)
     }
   },

@@ -1,7 +1,4 @@
 /* pages/orderList/index.wxss */
-page {
-  height: 100%;
-}
 /* 日期 */
 .con {
   display: flex;

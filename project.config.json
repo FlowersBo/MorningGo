@@ -76,8 +76,11 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
-    "packNpmRelationList": []
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "bundle": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.10.4",
@@ -91,27 +94,15 @@
   "simulatorPluginLibVersion": {},
   "condition": {
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
-      "currentL": -1,
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
-      "list": []
-    },
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
         {
           "id": 0,
@@ -142,15 +133,13 @@
           "scene": null
         },
         {
-          "id": -1,
           "name": "饼图",
-          "pathName": "pages/pieChart/index",
+          "pathName": "pages/index/reportDetails/index",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
-          "name": "订单列表",
+          "name": "订单",
           "pathName": "pages/orderList/index",
           "query": "",
           "scene": null

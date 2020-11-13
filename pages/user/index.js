@@ -146,23 +146,22 @@ Page({
       'push.pullText': '',
     })
     that.userInfoFn();
-    if (that.data.userInfo) {
-      setTimeout(() => {
+
+    setTimeout(() => {
+      if (that.data.userInfo) {
         that.setData({
           'pull.loading': '../../resource/img/finish.png',
           'pull.pullText': '刷新完成',
           'pull.isLoading': false
         })
-      }, 1500)
-    } else {
-      setTimeout(() => {
+      } else {
         that.setData({
           'pull.loading': '/resource/img/finish.png',
           'pull.pullText': '刷新失败',
           'pull.isLoading': false
         })
-      }, 1500)
-    }
+      }
+    }, 1500)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -64,6 +64,7 @@ function initChart(chart, data_item) {
 
 // 折线图
 function getLineOption(chart, data_item1, ecDatas) {
+  console.log("调用了")
   var option = {
     title: {
       text: '测试营业趋势',
@@ -79,6 +80,8 @@ function getLineOption(chart, data_item1, ecDatas) {
       selectedMode: true,
     },
     grid: {
+      left: '3%',
+      bottom: '3%',
       containLabel: true
     },
     tooltip: {
@@ -101,18 +104,12 @@ function getLineOption(chart, data_item1, ecDatas) {
       }
       // show: false
     },
-    grid: {
-      left: '3%',
-      bottom: '3%',
-      containLabel: true
-    },
     series: ecDatas
   };
   chart.setOption(option);
   return chart;
   // return option;
 };
-
 
 Page({
   /**

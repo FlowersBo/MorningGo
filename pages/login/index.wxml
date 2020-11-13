@@ -1,7 +1,7 @@
 <!--pages/login/index.wxml-->
-<cu-custom bgColor="bg-user-color">
+<!-- <cu-custom bgColor="bg-user-color">
   <view slot="content">晨购智能柜</view>
-</cu-custom>
+</cu-custom> -->
 <view class="loginWrap">
   <view class="loginTitle">用户登录</view>
   <view class="login">

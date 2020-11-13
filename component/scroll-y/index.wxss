@@ -7,11 +7,6 @@
   right: 0;
 }
 
-.icon-refresh {
-  width: 70rpx;
-  height: 70rpx;
-}
-
 .pull-refresh {
   height: 80rpx;
   display: flex;
@@ -19,6 +14,11 @@
   align-items: center;
   transition: all .5s ease-in-out;
   overflow: hidden;
+}
+
+.icon-refresh {
+  width: 70rpx;
+  height: 70rpx;
 }
 
 .chu {

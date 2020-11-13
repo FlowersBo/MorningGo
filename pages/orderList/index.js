@@ -34,10 +34,10 @@ Page({
   onLoad: function (options) {
     that = this;
     let current = '1';
-    let date = util.customFormatTime(new Date());
-    that.setData({
-      date: date
-    })
+    // let date = util.customFormatTime(new Date());
+    // that.setData({
+    //   date: date
+    // })
     const query = wx.createSelectorQuery().in(this)
     query.selectAll('.custom').boundingClientRect(function (res) {
       const customHeight = res[0].height;
@@ -101,9 +101,9 @@ Page({
         }
       })
       .catch(rej => {
-        console.log(rej)
+        console.log('无法请求',rej);
         wx.showToast({
-          title: rej.error,
+          title: '服务器忙，请稍后重试',
           icon: 'none',
           duration: 2000
         })
@@ -132,11 +132,11 @@ Page({
 
   refresh() {
     let current = '1';
-    let date = util.customFormatTime(new Date());
+    // let date = util.customFormatTime(new Date());
     that.setData({
       current: '1',
       orderList: [],
-      date: date
+      date: ''
     })
     if (that.data.orderList.length <= 0) {
       that.setData({
@@ -149,19 +149,11 @@ Page({
       console.log('当前orderList', Boolean(that.data.orderList));
       console.log(that.data.orderList.length > 0)
       setTimeout(() => {
-        if (that.data.orderList.length > 0) {
-          that.setData({
-            'pull.loading': '../../resource/img/finish.png',
-            'pull.pullText': '刷新完成',
-            'pull.isLoading': false
-          })
-        } else {
-          that.setData({
-            'pull.loading': '/resource/img/finish.png',
-            'pull.pullText': '刷新失败',
-            'pull.isLoading': false
-          })
-        }
+        that.setData({
+          'pull.loading': '../../resource/img/finish.png',
+          'pull.pullText': '刷新完成',
+          'pull.isLoading': false
+        })
       }, 1500)
     }
   },

@@ -1,6 +1,6 @@
 <!--pages/orderList/index.wxml-->
 <cu-custom bgColor="bg-user-color" class="custom">
-  <view slot="backText">返回</view>
+  <!-- <view slot="backText">返回</view> -->
   <view slot="content">订单</view>
 </cu-custom>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
@@ -10,7 +10,7 @@
   <view class="{{total?'con':'iconNone'}}">
     <view class="orderDate" title="日期">
       <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange">
-        <view class="weui-input">{{date}}</view>
+        <input class="weui-input" placeholder="请选择日期" disabled='true' value="{{date}}"></input>
       </picker>
       <image src="../../assets/img/timg.png" alt="" mode="aspectFit" />
     </view>

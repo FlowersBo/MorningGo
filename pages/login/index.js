@@ -73,7 +73,6 @@ Page({
     let data = {
       username: parseInt(phoneNumber)
     }
-
     if (isVerifyOutTime == true) {
       // wx.showLoading({
       //   title: '验证码获取中',
