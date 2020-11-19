@@ -1,5 +1,5 @@
 <!--pages/user/markeMoney/index.wxml-->
-<cu-custom bgColor="bg-user-color" isCustom="true" class="custom">
+<cu-custom bgColor="bg-user-color" isBack="true" class="custom">
   <view slot="backText">返回</view>
   <view slot="content">分账详情</view>
 </cu-custom>

@@ -187,12 +187,12 @@ Page({
       console.log(that.data.deviceList.length > 0)
       setTimeout(() => {
         // if (that.data.deviceList.length > 0) {
-          that.setData({
-            'pull.loading': '../../resource/img/finish.png',
-            'pull.pullText': '刷新完成',
-            'pull.isLoading': false,
-            serchContent: ''
-          })
+        that.setData({
+          'pull.loading': '../../resource/img/finish.png',
+          'pull.pullText': '刷新完成',
+          'pull.isLoading': false,
+          serchContent: ''
+        })
         // }else {
         //   that.setData({
         //     'pull.loading': '/resource/img/finish.png',
@@ -208,6 +208,8 @@ Page({
   toload() {
     let current = that.data.current;
     let total = that.data.total;
+    let serchContent = that.data.serchContent;
+    console.log('加载时点位', serchContent);
     if (that.data.deviceList.length < total) {
       that.setData({
         'push.isLoading': true,
@@ -217,7 +219,7 @@ Page({
       current++;
       current = String(current);
       console.log(current)
-      that.deviceListFn(current);
+      that.deviceListFn(current, serchContent);
       setTimeout(() => {
         that.setData({
           current: current,

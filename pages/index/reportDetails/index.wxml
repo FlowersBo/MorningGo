@@ -1,35 +1,44 @@
 <!--pages/index/reportDetails/index.wxml-->
-<cu-custom bgColor="bg-user-color" isCustom="true" class="custom">
+<cu-custom bgColor="bg-user-color" isBack="true" class="custom">
+  <!-- isCustom="true" -->
   <view slot="backText">返回</view>
   <view slot="content">{{point.pointname}}</view>
 </cu-custom>
-<scroll-y wx:if="{{!isFlag}}" class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
+<scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
   style="position: absolute;top: {{2*customHeight}}rpx;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh">
-  <view class="reportDetailsWrap">
+  <view wx:if="{{!isFlag}}" class="reportDetailsWrap">
     <view class="reportDetails">
       <!-- 日期选择 -->
       <view hidden="{{point.daynumber===7}}" class="con">
         <view class="orderDate" title="日期">
-          <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange">
+          <picker data-field="date" mode="date" value="{{date}}" end="{{endDate}}" bindchange="bindDateChange">
             <input class="weui-input" placeholder="请选择日期" disabled='true' value="{{date}}"></input>
           </picker>
           <image src="../../../assets/img/timg.png" alt="" mode="aspectFit" />
         </view>
       </view>
-      <view class="echartsWrap">
-        <ec-canvas class="ec_canvas" id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
-      </view>
+      <block wx:if="{{isShow}}">
+        <view class="echartsWrap">
+          <ec-canvas class="ec_canvas" id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="lack_imgWrap">
+          <image class="lack_img" src="../../../resource/img/lack_img.png" mode="aspectFit"></image>
+          <view class="lack_text">暂无数据</view>
+        </view>
+      </block>
       <view hidden="{{point.daynumber===7}}" class="btnWrap">
-        <view class="beforeDay" data-day="0" bindtap="toDayFn">
+        <view class="beforeDay" hover-class="getNum_hover" data-day="0" bindtap="toDayFn">
           <icon class="iconfont dayicon iconkuaitui"></icon>
           <view class="dayText">前一天</view>
         </view>
-        <view class="afterDay" data-day="1" bindtap="toDayFn">
+        <view class="afterDay" hover-class="getNum_hover" data-day="1" bindtap="toDayFn">
           <view class="dayText">后一天</view>
           <icon class="iconfont dayicon iconkuaijin"></icon>
         </view>
       </view>
     </view>
   </view>
+  <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
-<noData isFlag="{{isFlag}}"></noData>

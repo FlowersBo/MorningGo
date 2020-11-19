@@ -101,7 +101,7 @@ Page({
         }
       })
       .catch(rej => {
-        console.log('无法请求',rej);
+        console.log('无法请求', rej);
         wx.showToast({
           title: '服务器忙，请稍后重试',
           icon: 'none',
@@ -162,6 +162,8 @@ Page({
   toload() {
     let current = that.data.current;
     let total = that.data.total;
+    let date = that.data.date;
+    console.log('加载时时间',date);
     if (that.data.orderList.length < total) {
       that.setData({
         'push.isLoading': true,
@@ -172,7 +174,7 @@ Page({
       console.log(current)
       current = String(current);
       console.log(current)
-      that.orderListFn(current);
+      that.orderListFn(current, date);
       setTimeout(() => {
         that.setData({
           current: current,
@@ -226,7 +228,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    // that.orderListFn();
+
   },
 
   /**

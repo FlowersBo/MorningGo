@@ -5,7 +5,6 @@
     "pages/login/index",
     "pages/cs/index",
     "pages/user/index",
-    "pages/pieChart/index",
     "pages/orderList/index",
     "pages/equipment/index",
     "pages/user/markeMoney/index"

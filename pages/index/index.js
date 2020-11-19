@@ -282,7 +282,8 @@ Page({
     if (dateRange === 0) {
       apiUrl = api.yesterdayData;
       that.setData({
-        dayNumber: 1
+        dayNumber: 1,
+        isShow: false
       })
       reportDetail.titles.fill('占比', 3);
     } else if (dateRange === 1) {
@@ -334,7 +335,8 @@ Page({
         } else {
           wx.showToast({
             title: resp.data.message,
-            duration: 2000
+            duration: 2000,
+            icon: 'none'
           })
         }
       })

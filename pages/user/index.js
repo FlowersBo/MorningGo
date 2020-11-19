@@ -118,9 +118,9 @@ Page({
   },
   //跳转销售金额呢
   toMarkeMoney: () => {
-    wx.navigateTo({
-      url: '/pages/user/markeMoney/index',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/user/markeMoney/index',
+    // })
   },
   topic_preview: (e) => {
     let previewImgArr = [];
