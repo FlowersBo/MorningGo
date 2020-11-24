@@ -178,6 +178,11 @@ ec-canvas {
   justify-content: space-between;
 }
 
+.tabTit_fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
 .tabTit .coding_flash_image {
   width: 14rpx;
@@ -212,16 +217,28 @@ ec-canvas {
   display: none;
 }
 
+.list{
+  box-shadow: 5px 5px 2px #ddd;
+}
+
 .list .list_item {
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
   background-color: #fff;
+}
+.list .list_item .price{
+  text-align: left;
 }
 .list .bac_a{
   background-color: #ddd;
 }
-
+.list{
+  border-radius: 0 0 10rpx 10rpx;
+}
+.list .list_item:last-child{
+  border-radius: 0 0 10rpx 10rpx;
+}
 
 .pull-refresh {
   height: 70rpx;
@@ -230,6 +247,8 @@ ec-canvas {
   align-items: center;
   transition: all .5s ease-in-out;
   overflow: hidden;
+  font-size: 24rpx;
+  color: #666;
 }
 
 .icon-refresh {
@@ -241,7 +260,7 @@ ec-canvas {
 }
 
 .jin {
-  height: 0rpx;
+  display: none;
 }
 
 /* 无数据 */

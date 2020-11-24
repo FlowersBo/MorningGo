@@ -3,7 +3,7 @@
   <view slot="content">我的</view>
 </cu-custom>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
-  style="position: absolute;top: {{2*customHeight}}rpx;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
   <view class="userWrap">
     <view class="user">
@@ -27,7 +27,7 @@
           <view class="money">{{AccountSharingProportion.sharing_price}}元</view>
         </view>
       </view>
-      <view class="phone" data-phone="{{userInfo.serviceTels}}" bindtap="openPhone">
+      <view class="phone" data-phone="{{userInfo.serviceTels?userInfo.serviceTels:userInfo.serviceTel}}" bindtap="openPhone">
         <view class="phoneNumber">联系运营商：{{userInfo.serviceTels?userInfo.serviceTels:userInfo.serviceTel}}</view>
         <view>
           <icon class="iconfont icondianhua"></icon>

@@ -131,13 +131,25 @@ Page({
 
   onLoad: function () {
     that = this;
-    // const query = wx.createSelectorQuery().in(this)
-    // query.selectAll('.custom').boundingClientRect(function (res) {
-    //   const customHeight = res[0].height;
-    //   that.setData({
-    //     customHeight: customHeight
-    //   })
-    // }).exec()
+    var sysinfo = wx.getSystemInfoSync(),
+      statusHeight = sysinfo.statusBarHeight,
+      isiOS = sysinfo.system.indexOf('iOS') > -1,
+      navHeight;
+    console.log(sysinfo)
+    if (!isiOS) {
+      navHeight = 48;
+    } else {
+      navHeight = 44;
+    }
+
+    const query = wx.createSelectorQuery().in(this)
+    query.selectAll('.tabTit').boundingClientRect(function (res) {
+      const tabTitTop = res[0].top;
+      that.setData({
+        tabTitTop: tabTitTop
+      })
+    }).exec()
+
     let dateRange = that.data.dateRange;
     // this.renderChart(dateRange);
     that.setData({
@@ -150,7 +162,7 @@ Page({
   onShow: function () {
 
   },
-  // 切换日/月报
+  
   selectedReportGenres: function (e) {
     let that = this;
     let index = e.currentTarget.dataset.index;
@@ -170,8 +182,7 @@ Page({
     // this.renderChart(dateRange);
     this.renderReport(dateRange);
   },
-
-  // 切换天/月数
+ 
   selectedDateRange: function (e) {
     let that = this;
     let index = e.currentTarget.dataset.index;
@@ -191,8 +202,7 @@ Page({
     // this.renderChart(dateRange);
     this.renderReport(dateRange);
   },
-
-  // 时间段计算
+ 
   renderTransactionSummation: function (dateRange = 0) {
     let pointReportDate = new Date();
     let pointSummationReportDate = new Date();
@@ -256,8 +266,7 @@ Page({
     }
   },
 
-  // 数据
-  renderReport: function (dateRange = 0, pointName = '', pageIndex = 1, pointsData = []) {
+  renderReport: function (dateRange = 0, serchContent = '', pageIndex = 1, pointsData = []) {
     let that = this;
     let salesVolumeSort = that.data.salesVolumeSort; //排序按销售额为升序
     let orderQuantitySort = that.data.orderQuantitySort; //默认订单量升序
@@ -275,7 +284,7 @@ Page({
       pagesize: pageSize,
       salesVolumeSort: salesVolumeSort,
       orderQuantitySort: orderQuantitySort,
-      pointName: pointName,
+      pointName: serchContent,
       id: wx.getStorageSync('userID'),
     };
     let apiUrl = '';
@@ -316,6 +325,9 @@ Page({
           if (resp.data.data.list[0]) {
             reportTotal['销售额（元）'] = resp.data.data.list[0].priceSum;
             reportTotal['订单量（次）'] = resp.data.data.allOrderCount;
+          } else {
+            reportTotal['销售额（元）'] = 0;
+            reportTotal['订单量（次）'] = 0;
           }
           let dateTitle = '';
           if (resp.data.data.lastSevenDaysDataAgency) {
@@ -347,12 +359,18 @@ Page({
       })
   },
 
-  // echarts
   initGraph: function (lastSevenDaysDataAgency, dateTitle) {
-    that.setData({
-      isShow: true
-    })
     console.log('折线图数据', lastSevenDaysDataAgency);
+    if (lastSevenDaysDataAgency.length > 0) {
+      that.setData({
+        isShow: true
+      })
+    } else {
+      that.setData({
+        isShow: false
+      })
+      return
+    }
     let finishDatesWrap = [],
       sumPriceWrap = [],
       orderCountWrap = [];
@@ -383,7 +401,6 @@ Page({
     });
   },
 
-  //跳转统计饼图
   bindReportDetaill: function (e) {
     let point = e.currentTarget.dataset;
     wx.navigateTo({
@@ -405,19 +422,45 @@ Page({
     })
   },
 
-  //搜索查找
   bindPointSerch: function (e) {
+    var query = wx.createSelectorQuery().in(this);
+    query.selectViewport().scrollOffset()
+    query.select("#sales").boundingClientRect();
+    query.exec(function (res) {
+      // var miss = res[0].scrollTop + res[1].top - 10;
+      var miss = 0;
+      wx.pageScrollTo({
+        scrollTop: miss,
+        duration: 300
+      });
+    });
     let dateRange = that.data.dateRange;
     let serchContent = e.detail.value;
     that.setData({
       'push.pullText': '',
       serchContent: serchContent
     })
-    that.renderReport(dateRange, serchContent);
+    let pageIndex = 1,
+      pointsData = [];
+    that.renderReport(dateRange, serchContent, pageIndex, pointsData);
   },
 
-  // 排序
   bindPointSort: function (e) {
+    var query = wx.createSelectorQuery().in(this);
+    query.select("#sales").boundingClientRect();
+    query.selectViewport().scrollOffset()
+    query.exec(function (res) {
+      // res[0].top       // #sales节点的上边界坐标
+      // res[1].scrollTop // 显示区域的竖直滚动位置
+      console.log(res[0].top, res[1].scrollTop);
+      // var miss = res[0].top + res[1].scrollTop-10;
+      var miss = 0;
+      wx.pageScrollTo({
+        scrollTop: miss,
+        duration: 300
+      });
+    });
+
     let that = this;
     let isSaleAmountSort = that.data.isSaleAmountSort;
     let isSaleCountSort = that.data.isSaleCountSort;
@@ -465,8 +508,19 @@ Page({
     } else {
       return;
     }
+    let pageIndex = 1,
+      pointsData = [];
+    that.setData({
+      'push.pullText': '- 上拉加载更多 -',
+    })
+    that.renderReport(dateRange, '', pageIndex, pointsData);
+  },
 
-    this.renderReport(dateRange);
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
   },
 
   /**
@@ -478,81 +532,43 @@ Page({
     let dateRange = that.data.dateRange;
     let pageSize = that.data.pageSize;
     let pointTotal = that.data.pointTotal;
+    let serchContent = that.data.serchContent;
     console.log('下一页', pageIndex);
     if (pointsData.length < pointTotal) {
+      console.log('正在加载')
+      // that.setData({
+      //   'push.isLoading': true,
+      //   'push.pullText': '正在加载',
+      //   'push.loading': '../../resource/img/pull_refresh.gif',
+      // })
+      that.renderReport(dateRange, serchContent, pageIndex, pointsData);
+      // setTimeout(() => {
       that.setData({
         'push.isLoading': true,
-        'push.pullText': '正在加载',
-        'push.loading': '../../resource/img/pull_refresh.gif',
+        'push.pullText': '- 上拉加载更多 -',
+        'push.loading': '../../resource/img/finish.png',
       })
-      that.renderReport(dateRange, '', pageIndex, pointsData);
-      setTimeout(() => {
-        that.setData({
-          pageIndex: pageIndex,
-          'push.isLoading': false,
-          'push.pullText': '- 上拉加载更多 -',
-          'push.loading': '../../resource/img/finish.png',
-        })
-      }, 1500)
-    } else if ((pointTotal / pageSize) < pageIndex && pointTotal > 0) {
+      // }, 1500)
+    } else if (pointsData.length >= 10 && (pointTotal / pageSize) < pageIndex && pointTotal > 0) {
       that.setData({
         'push.isLoading': true,
-        'push.pullText': '- 我也是有底线的 -'
+        'push.pullText': '- 我也是有底线的 -',
+        'push.loading': '',
       })
     }
   },
 
-  // 刷新
-  // refresh() {
-  //   let dateRange = that.data.dateRange;
-  //   that.setData({
-  //     pageIndex: 1,
-  //     pointsData: []
-  //   })
-  //   that.setData({
-  //     'pull.isLoading': true,
-  //     'pull.loading': '../../resource/img/pull_refresh.gif',
-  //     'pull.pullText': '正在刷新',
-  //     'push.pullText': '',
-  //   })
-  //   that.renderReport(dateRange);
-  //   setTimeout(() => {
-  //     that.setData({
-  //       'pull.loading': '../../resource/img/finish.png',
-  //       'pull.pullText': '刷新完成',
-  //       'pull.isLoading': false
-  //     })
-  //   }, 1500)
-  // },
 
-  // toload() {
-  //   let pointsData = that.data.pointsData;
-  //   let pageIndex = that.data.pageIndex;
-  //   let dateRange = that.data.dateRange;
-  //   let pageSize = that.data.pageSize;
-  //   let pointTotal = that.data.pointTotal;
-  //   console.log('下一页', pageIndex);
-  //   if (pointsData.length < pointTotal) {
-  //     that.setData({
-  //       'push.isLoading': true,
-  //       'push.pullText': '正在加载',
-  //       'push.loading': '../../resource/img/pull_refresh.gif',
-  //     })
-  //     that.renderReport(dateRange, '', pageIndex, pointsData);
-  //     setTimeout(() => {
-  //       that.setData({
-  //         pageIndex: pageIndex,
-  //         'push.isLoading': false,
-  //         'push.pullText': '- 上拉加载更多 -',
-  //         'push.loading': '../../resource/img/finish.png',
-  //       })
-  //     }, 1500)
-  //   } else if ((pointTotal / pageSize) < pageIndex) {
-  //     that.setData({
-  //       'push.isLoading': false,
-  //       'push.pullText': '- 我也是有底线的 -'
-  //     })
-  //   }
-  // },
-
+  onPageScroll: function (e) {
+    let tabTitTop = that.data.tabTitTop;
+    if (parseInt(e.scrollTop) > tabTitTop) {
+      that.setData({
+        floorstatus: true
+      })
+    } else {
+      that.setData({
+        floorstatus: false
+      })
+    }
+  },
 })

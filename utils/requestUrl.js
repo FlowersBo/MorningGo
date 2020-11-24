@@ -236,6 +236,7 @@ function loginPhone(loginInfo = {}) {
       },
       success: function (resp) {
         if (resp.data.code == 200) {
+          console.log(resp)
           wx.setStorageSync('accessToken', resp.data.data.access_token);
           wx.setStorageSync('refreshToken', resp.data.data.refresh_token);
           wx.setStorageSync('username', resp.data.data.username);

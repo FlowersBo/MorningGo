@@ -15,7 +15,7 @@
       <view class="phone-box">
         <text class="phone">验证码：</text>
         <!-- placeholder-style="color:#bbb" -->
-        <input name="verificationCode" placeholder="请输入验证码"  maxlength="6" class="number" bindinput="bindInputVerificationCode" />
+        <input name="verificationCode" type="number" placeholder="请输入验证码" maxlength="6" class="number" bindinput="bindInputVerificationCode" />
         <view bindtap="getVerificationCode" class="getNum {{isRepeatGetNum}}" hover-class="getNum_hover" hover-stay-time="100">
           {{verificationControlText}}</view>
       </view>

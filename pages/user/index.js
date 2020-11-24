@@ -173,13 +173,13 @@ Page({
   onShow: function () {
     //瀑布流的效果
     setTimeout(function () {
-      app.sliderightupshow(this, 'slide_up1', 90, 115, 1)
+      app.sliderightupshow(this, 'slide_up1', 110, 165, 1)
     }.bind(this), 500);
     setTimeout(function () {
-      app.sliderightupshow(this, 'slide_up2', 145, -115, 1)
+      app.sliderightupshow(this, 'slide_up2', 160, -135, 1)
     }.bind(this), 200);
     setTimeout(function () {
-      app.sliderightupshow(this, 'slide_up3', -200, 50, 1)
+      app.sliderightupshow(this, 'slide_up3', -220, 50, 1)
     }.bind(this), 800);
   },
 

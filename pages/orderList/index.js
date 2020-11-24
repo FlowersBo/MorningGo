@@ -38,13 +38,6 @@ Page({
     // that.setData({
     //   date: date
     // })
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.custom').boundingClientRect(function (res) {
-      const customHeight = res[0].height;
-      that.setData({
-        customHeight: customHeight
-      })
-    }).exec()
     that.orderListFn(current);
   },
 
@@ -146,8 +139,6 @@ Page({
         'push.pullText': '',
       })
       that.orderListFn(current);
-      console.log('当前orderList', Boolean(that.data.orderList));
-      console.log(that.data.orderList.length > 0)
       setTimeout(() => {
         that.setData({
           'pull.loading': '../../resource/img/finish.png',
@@ -163,7 +154,7 @@ Page({
     let current = that.data.current;
     let total = that.data.total;
     let date = that.data.date;
-    console.log('加载时时间',date);
+    console.log('加载时时间', date);
     if (that.data.orderList.length < total) {
       that.setData({
         'push.isLoading': true,
@@ -183,7 +174,7 @@ Page({
           'push.loading': '../../resource/img/finish.png',
         })
       }, 1500)
-    } else if ((current * that.data.pageSize) > total) {
+    } else if (that.data.orderList.length > 0 && (current * that.data.pageSize) > total) {
       that.setData({
         'push.isLoading': false,
         'push.pullText': '- 我也是有底线的 -'
@@ -202,7 +193,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const query = wx.createSelectorQuery().in(this)
+    query.selectAll('.custom').boundingClientRect(function (res) {
+      const customHeight = res[0].height;
+      that.setData({
+        customHeight: customHeight
+      })
+    }).exec()
   },
   // 点击跳转订单详情
   clickOrder: (e) => {

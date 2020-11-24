@@ -1,6 +1,10 @@
 /**app.wxss**/
 @import "/colorui/main.wxss";
 @import "/colorui/icon.wxss";
+@import "/utils/fontFamily.wxss";
+page{
+  font-family: 'Fira_Code';
+}
 .container {
   height: 100%;
   display: flex;

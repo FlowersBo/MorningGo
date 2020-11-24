@@ -4,7 +4,7 @@
   <view slot="content">订单</view>
 </cu-custom>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
-  style="position: absolute;top: {{2*customHeight}}rpx;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
   <!-- 日期选择 -->
   <view class="{{total?'con':'iconNone'}}">

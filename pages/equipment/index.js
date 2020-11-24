@@ -173,7 +173,8 @@ Page({
     let current = '1';
     that.setData({
       current: '1',
-      deviceList: []
+      deviceList: [],
+      serchContent: ''
     })
     if (that.data.deviceList.length <= 0) {
       that.setData({
@@ -183,23 +184,12 @@ Page({
         'push.pullText': '',
       })
       that.deviceListFn(current);
-      console.log('当前orderList', Boolean(that.data.deviceList));
-      console.log(that.data.deviceList.length > 0)
       setTimeout(() => {
-        // if (that.data.deviceList.length > 0) {
         that.setData({
           'pull.loading': '../../resource/img/finish.png',
           'pull.pullText': '刷新完成',
-          'pull.isLoading': false,
-          serchContent: ''
+          'pull.isLoading': false
         })
-        // }else {
-        //   that.setData({
-        //     'pull.loading': '/resource/img/finish.png',
-        //     'pull.pullText': '刷新完成',
-        //     'pull.isLoading': false
-        //   })
-        // }
       }, 1500)
     }
   },
@@ -228,7 +218,7 @@ Page({
           'push.loading': '../../resource/img/finish.png',
         })
       }, 1500)
-    } else if ((current * that.data.pageSize) > that.data.total) {
+    } else if (that.data.deviceList.length > 0 && (current * that.data.pageSize) > that.data.total) {
       that.setData({
         'push.isLoading': false,
         'push.pullText': '- 我也是有底线的 -'

@@ -3,5 +3,6 @@
     "ec-canvas": "../../../component/ec-canvas/ec-canvas"
   },
   "navigationStyle": "custom",
-  "disableScroll": true
+  "disableScroll": true,
+  "enablePullDownRefresh": false
 }

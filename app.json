@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/login/index",
     "pages/index/index",
     "pages/index/reportDetails/index",
-    "pages/login/index",
     "pages/cs/index",
     "pages/user/index",
     "pages/orderList/index",
@@ -15,7 +15,7 @@
     "navigationBarBackgroundColor": "#0042BB",
     "navigationBarTitleText": "智能充电柜",
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true,
+    "enablePullDownRefresh": false,
     "backgroundColor": "#fff"
 },
   "usingComponents": {

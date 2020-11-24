@@ -12,7 +12,7 @@
 			{{item}}
 		</view>
 	</view>
-	<view class="sales">
+	<view class="sales" id="sales">
 		<view class="sales_list" wx:for="{{reportTotal}}" wx:key="index" wx:for-index="key" data-item="item">
 			<view class="quantity"> {{key}}</view>
 			<view class="num">{{item}}</view>
@@ -33,7 +33,7 @@
 			<icon class="iconfont iconfangdajing"></icon>
 		</view>
 	</view>
-	<view class="tabTit box">
+	<view class="tabTit box {{floorstatus?'tabTit_fixed':''}}">
 		<view class="flex1" wx:for="{{reportDetail.titles}}" wx:key="type" data-index="{{index}}" bindtap="bindPointSort">
 			<label>
 				<text>{{item}}</text>
@@ -43,7 +43,7 @@
 	</view>
 	<view class="list">
 		<block wx:for="{{pointsData}}" wx:key="list" wx:for-item="item">
-			<view class="list_item {{index/2===0?'bac_a':''}}">
+			<view class="list_item {{index%2==0?'bac_a':''}}">
 				<view class="info box">
 					<view class="title flex1 ">{{item.pointName?item.pointName:item.pointAddress}}</view>
 					<view class="price flex1 " style="color:#d81e06">￥{{item.priceSum>=0?item.priceSum:item.saleMoney}}</view>
@@ -62,8 +62,8 @@
 		<text class="icon_text">暂无数据，亲亲稍后再来吧~~</text>
 	</view>
 
-	<view class="pull-refresh {{push.isLoading ? 'chu' : 'jin'}}">
-		<image class="icon-refresh z-index-1" src="{{push.loading}}" />
+	<view class="pull-refresh {{push.isLoading?chu:jin}}">
+		<!-- <image class="icon-refresh z-index-1" wx:if="{{push.isLoading}}"  src="{{push.loading}}" /> -->
 		<view class="fs24 pt20 f-color-666 z-index-1">{{push.pullText}}</view>
 	</view>
 	<!-- <view class="button-wrapper">

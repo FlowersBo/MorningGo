@@ -44,7 +44,7 @@
 }
 
 .user_phone {
-  font-size: 32rpx;
+  font-size: 36rpx;
 }
 
 .marketMoneyWrap {

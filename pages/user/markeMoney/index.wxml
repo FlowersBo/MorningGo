@@ -8,7 +8,7 @@
   <view class="bg-green" style="width:{{progress}}%;"></view>
 </view>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
-  style="position: absolute;top: {{2*customHeight+10}}rpx;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
   <view class="userWrap">
     <view class="marketMoneyWrap">

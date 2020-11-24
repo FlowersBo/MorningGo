@@ -3,10 +3,10 @@
   <view slot="content">设备</view>
 </cu-custom>
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
-  style="position: absolute;top: {{2*customHeight}}rpx;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
+  style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
-  <view class="con">
-    <view class="device" title="设备" wx:if="{{total}}">
+  <view class="{{total>=0?'con':'iconNone'}}">
+    <view class="device" title="设备">
       <input type="text" confirm-type="search" placeholder="点位名称/设备编号" value="{{serchContent}}"
         bindconfirm="bindPointSerch" />
       <icon class="iconfont iconfangdajing"></icon>

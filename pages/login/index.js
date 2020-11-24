@@ -187,7 +187,7 @@ Page({
           console.log('登录返回', resp);
           if (resp.data.code == 200) {
             wx.switchTab({
-              url: '../user/index'
+              url: '../index/index'
             });
           } else {
             wx.showToast({

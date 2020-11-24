@@ -11,7 +11,7 @@ function initChart(chart, dataItem) {
     backgroundColor: "#fff",
     color: ["#C34B45", "#476A83", "#5BAFBA", "#91F2DE", "#FFDB5C", "#FF9F7F"],
     title: {
-      text: '销售额' + '(前' + that.data.point.daynumber + '天)',
+      text: '销售额' + '(' + that.data.point.dayTitle + ')占比',
       left: 'center',
       top: '2%',
       color: '#333'
@@ -110,6 +110,11 @@ Page({
       // wx.setNavigationBarTitle({
       //   title: data.point.pointname,
       // })
+      if(data.point.daynumber===1){
+        data.point.dayTitle='昨日'
+      }else{
+        data.point.dayTitle='近7天'
+      }
       that.setData({
         point: data.point
       })
@@ -193,20 +198,20 @@ Page({
     for (const key in dayList) {
       let dayDate_item = {};
       console.log(dayList[key]);
-      if (dayList[key].specifications === '1') {
+      if (dayList[key].specifications === '0') {
         dayDate_item.name = '小柜';
         dayDate_item.value = dayList[key].priceSum;
         console.log('dayDate_item',dayDate_item)
         if (dayDate_item.value > 0) {
           dayDateWrap.push(dayDate_item);
         }
-      } else if (dayList[key].specifications === '2') {
+      } else if (dayList[key].specifications === '1') {
         dayDate_item.name = '中柜';
         dayDate_item.value = dayList[key].priceSum;
         if (dayDate_item.value > 0) {
           dayDateWrap.push(dayDate_item);
         }
-      } else if (dayList[key].specifications === '3') {
+      } else if (dayList[key].specifications === '2') {
         dayDate_item.name = '大柜';
         dayDate_item.value = dayList[key].priceSum;
         if (dayDate_item.value > 0) {

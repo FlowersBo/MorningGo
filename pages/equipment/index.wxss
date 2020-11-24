@@ -13,6 +13,9 @@
   margin-top: 20rpx;
   position: relative;
 }
+.iconNone {
+  display: none;
+}
 
 .device input {
   width: 100%;
@@ -43,11 +46,12 @@
   height: 340rpx;
   border-radius: 10rpx;
   background-color: #fff;
-  margin-top: 20rpx;
+  margin-top: 24rpx;
   padding: 10rpx 17rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 5px 5px 2px #ddd;
 }
 
 .equipment_child {
@@ -98,9 +102,6 @@
   padding-top: 150rpx;
 }
 
-.iconNone {
-  display: none;
-}
 
 .mask_icon {
   font-size: 400rpx;
