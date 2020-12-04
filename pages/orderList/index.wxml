@@ -6,8 +6,10 @@
 <scroll-y class="scroll-view" pull="{{pull}}" push="{{push}}" listLength="{{clueData.length}}"
   style="position: absolute;top: {{customHeight}}px;bottom: 0;width: 100%;flex: 1;" bindrefresh="refresh"
   bindtoload="toload">
-  <!-- 日期选择 -->
+  <!-- 日期选择 --> 
   <view class="{{total?'con':'iconNone'}}">
+    <view wx:if="{{priceSum>=0}}" class="priceNumber">当日销售总额：<text style="color:#179B17">{{priceSum}}</text>元</view>
+    <view></view>
     <view class="orderDate" title="日期">
       <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange">
         <input class="weui-input" placeholder="请选择日期" disabled='true' value="{{date}}"></input>
@@ -63,9 +65,9 @@
       </view>
     </block>
   </view>
+  <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
 <!-- <view class="{{isFlag?'iconWrap':'iconNone'}}">
   <icon class="iconfont icon iconzanwushuju"></icon>
   <text class="icon_text">暂无数据，亲亲稍后再来吧~~</text>
 </view> -->
-<noData isFlag="{{isFlag}}"></noData>

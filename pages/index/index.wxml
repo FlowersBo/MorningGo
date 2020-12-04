@@ -48,7 +48,7 @@
 					<view class="title flex1 ">{{item.pointName?item.pointName:item.pointAddress}}</view>
 					<view class="price flex1 " style="color:#d81e06">￥{{item.priceSum>=0?item.priceSum:item.saleMoney}}</view>
 					<view class="num flex1 ">{{item.pointOrderCount?item.pointOrderCount:item.orderCount}}</view>
-					<view wx:if="{{item.pointId}}" class="report_details flex1 " bindtap="bindReportDetaill"
+					<view wx:if="{{reportDetail.titles[3]==='占比'}}" class="report_details flex1 " bindtap="bindReportDetaill"
 						data-pointId="{{item.pointId}}" data-pointName="{{item.pointName}}" data-dayNumber="{{dayNumber}}">
 						<icon class="iconfont iconicon_tubiao_bingtu"></icon>
 					</view>

@@ -26,6 +26,7 @@ Page({
       pullText: ''
     },
     date: '',
+    priceSum: -1,
   },
 
   /**
@@ -57,6 +58,9 @@ Page({
         console.log("订单列表", res);
         if (res.data.code == "200") {
           let orderList = res.data.data.list;
+          that.setData({
+            priceSum: res.data.data.priceSum
+          })
           orderList.forEach(element => {
             if (element.finishDate) {
               element.orderDate = util.intervalTime(element.startDate, element.finishDate);
@@ -129,7 +133,8 @@ Page({
     that.setData({
       current: '1',
       orderList: [],
-      date: ''
+      date: '',
+      priceSum: -1
     })
     if (that.data.orderList.length <= 0) {
       that.setData({

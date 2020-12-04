@@ -4,5 +4,6 @@
   },
   "onReachBottomDistance": 0,
   "navigationBarTitleText": "报表",
+  "backgroundTextStyle": "dark",
   "enablePullDownRefresh": false
 }

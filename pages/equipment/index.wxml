@@ -18,8 +18,11 @@
         <view class="equipment_child">
           <view class="equipment_item">设备编号：{{item.deviceNo}}</view>
           <view class="equipment_signal">
-            <icon class="iconfont icon iconxinhao {{item.isOnline==='1'?'':'isStatus'}}"></icon>
-            <icon class="iconfont icon iconyuanquan1 {{item.fault_count===0?'':'isStatus'}}"></icon>
+            <view class="status_item {{item.isOnline==='1'?'':'isStatus'}}">{{item.isOnline==='1'?'在线':'离线'}}
+            </view>
+            <view wx:if="{{item.fault_count!==0}}" class="status_item isStatus">(故障)</view>
+            <!-- <icon class="iconfont icon iconxinhao {{item.isOnline==='1'?'':'isStatus'}}"></icon>
+            <icon class="iconfont icon iconyuanquan1 {{item.fault_count===0?'':'isStatus'}}"></icon> -->
           </view>
         </view>
         <view class="equipment_item">点位名称：{{item.pointName}}</view>
@@ -27,10 +30,10 @@
         <view class="equipment_child">
           <view class="equipment_item">格口数量：总计：{{item.alls}}</view>
           <view class="equipment_item">使用中：{{item.used}}</view>
-          <view class="equipment_item">空闲：{{item.frees}}</view>
+          <view class="equipment_item">空闲：<text style="color:#179B17">{{item.frees}}</text> </view>
         </view>
       </view>
     </block>
   </view>
+  <noData isFlag="{{isFlag}}"></noData>
 </scroll-y>
-<noData isFlag="{{isFlag}}"></noData>

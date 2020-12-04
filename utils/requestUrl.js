@@ -12,7 +12,10 @@ function request(url, data = {}, method = "GET") {
       header: {
         'charset': 'utf-8',
         'Content-Type': 'application/json',
-        'app-access-token': wx.getStorageSync('accessToken')
+        'app-refresh-token': wx.getStorageSync('refreshToken'),
+        'app-access-token': wx.getStorageSync('accessToken'),
+        'grant-type': 'refresh-token',
+        'username': wx.getStorageSync('username'),
       },
       success: function (resp) {
         console.log("success");
@@ -37,6 +40,13 @@ function request(url, data = {}, method = "GET") {
           });
         } else {
           resolve(resp.data);
+        }
+        if (!resp.data.message) {
+          wx.showToast({
+            title: '服务器错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
         }
       },
       fail: function (err) {
@@ -63,8 +73,10 @@ const wxRequest = (url, data = {}, method = 'POST') => {
       data: data,
       header: {
         'charset': 'utf-8',
-        'content-type': 'application/json', // 默认值
+        'Content-Type': 'application/json',
+        'grant-type': 'refresh-token',
         'app-refresh-token': wx.getStorageSync('refreshToken'),
+        'app-access-token': wx.getStorageSync('accessToken'),
         'username': wx.getStorageSync('username'),
       },
       success: function (res) {
@@ -110,7 +122,9 @@ const wxGetRequest = (url, data = {}, method = 'GET') => {
       header: {
         'charset': 'utf-8',
         'Content-Type': 'application/json',
+        'grant-type': 'refresh-token',
         'app-refresh-token': wx.getStorageSync('refreshToken'),
+        'app-access-token': wx.getStorageSync('accessToken'),
         'username': wx.getStorageSync('username'),
       },
       success: function (resp) {
@@ -118,7 +132,7 @@ const wxGetRequest = (url, data = {}, method = 'GET') => {
         if (resp.statusCode === 200) {
           resolve(resp);
         } else {
-          reject(resp.errMsg,resp.statusCode);
+          reject(resp.errMsg, resp.statusCode);
         }
 
         //Unauthorized
@@ -135,10 +149,21 @@ const wxGetRequest = (url, data = {}, method = 'GET') => {
         } else {
           resolve(resp.data);
         }
+        if (!resp.data.message) {
+          wx.showToast({
+            title: '服务器错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
+        }
       },
       fail: function (err) {
-        reject('整体错误',err)
-        console.log("failed")
+        reject('整体错误', err)
+        wx.showToast({
+          title: '请求超时',
+          icon: 'none',
+          duration: 2000
+        });
       },
       complete: (res) => {
         ajaxTimes--;
@@ -172,6 +197,11 @@ function login() {
       },
       fail: function (err) {
         reject(err);
+        wx.showToast({
+          title: '请求超时',
+          icon: 'none',
+          duration: 1000
+        });
       }
     });
   });
@@ -184,9 +214,12 @@ function refreshToken() {
       url: api.RefreshAuth,
       method: 'Post',
       header: {
+        'charset': 'utf-8',
+        'Content-Type': 'application/json',
+        'grant-type': 'refresh-token',
         'app-refresh-token': wx.getStorageSync('refreshToken'),
         'app-access-token': wx.getStorageSync('accessToken'),
-        'grant-type': 'refresh-token',
+        'username': wx.getStorageSync('username'),
       },
       success: function (resp) {
         if (resp.data.code == 200) {
@@ -195,10 +228,22 @@ function refreshToken() {
           wx.setStorageSync('username', resp.data.data.username);
           wx.setStorageSync('loginUserType', resp.data.data.loginUserType);
         }
+        if (!resp.data.message) {
+          wx.showToast({
+            title: '服务器错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
+        }
         resolve(resp);
       },
       fail: function (err) {
         reject(err);
+        // wx.showToast({
+        //   title: '请求超时',
+        //   icon: 'none',
+        //   duration: 1000
+        // });
       }
     })
   });
@@ -216,9 +261,21 @@ function getVerificationCode(data = {}) {
       },
       success: function (resp) {
         resolve(resp);
+        if (!resp.data.message) {
+          wx.showToast({
+            title: '服务器错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
+        }
       },
       fail: function (err) {
         reject(err);
+        wx.showToast({
+          title: '请求超时',
+          icon: 'none',
+          duration: 1000
+        });
       }
     })
   });
@@ -226,6 +283,9 @@ function getVerificationCode(data = {}) {
 
 //phone login
 function loginPhone(loginInfo = {}) {
+  wx.showLoading({
+    title: '登录中',
+  })
   let param = objectToJsonParams(loginInfo);
   return new Promise(function (resolve, reject) {
     wx.request({
@@ -243,10 +303,24 @@ function loginPhone(loginInfo = {}) {
           wx.setStorageSync('loginUserType', resp.data.data.loginUserType);
           wx.setStorageSync('userID', resp.data.data.info.id);
         }
+        if (!resp.data.message) {
+          wx.showToast({
+            title: '服务器错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
+        }
         resolve(resp);
+        wx.hideLoading();
       },
       fail: function (err) {
         reject(err);
+        wx.showToast({
+          title: '请求超时',
+          icon: 'none',
+          duration: 1000
+        });
+        wx.hideLoading();
       }
     })
   });

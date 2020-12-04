@@ -5,7 +5,6 @@ import * as util from '../../utils/util';
 let that;
 
 function getLineOption(chart, leftData, rightData, dateTitle) {
-  console.log('调用了')
   var option = {
     title: {
       text: dateTitle + '销售额(订单量)',
@@ -62,6 +61,7 @@ function getLineOption(chart, leftData, rightData, dateTitle) {
           fontSize: '12',
           verticalAlign: 'middle',
         },
+        minInterval: 1, //设置成1保证坐标轴分割刻度显示成整数
         type: 'value',
         data: rightData[0],
         splitLine: {
@@ -131,6 +131,15 @@ Page({
 
   onLoad: function () {
     that = this;
+    setTimeout(function () {
+      wx.createSelectorQuery().select('.tabTit').boundingClientRect(function (res) {
+        const tabTitTop = res.top;
+        console.log('距离顶部距离', tabTitTop)
+        that.setData({
+          tabTitTop: tabTitTop
+        })
+      }).exec()
+    }, 400)
     var sysinfo = wx.getSystemInfoSync(),
       statusHeight = sysinfo.statusBarHeight,
       isiOS = sysinfo.system.indexOf('iOS') > -1,
@@ -141,15 +150,6 @@ Page({
     } else {
       navHeight = 44;
     }
-
-    const query = wx.createSelectorQuery().in(this)
-    query.selectAll('.tabTit').boundingClientRect(function (res) {
-      const tabTitTop = res[0].top;
-      that.setData({
-        tabTitTop: tabTitTop
-      })
-    }).exec()
-
     let dateRange = that.data.dateRange;
     // this.renderChart(dateRange);
     that.setData({
@@ -162,9 +162,18 @@ Page({
   onShow: function () {
 
   },
-  
+
   selectedReportGenres: function (e) {
     let that = this;
+    setTimeout(function () {
+      wx.createSelectorQuery().select('.tabTit').boundingClientRect(function (res) {
+        const tabTitTop = res.top;
+        console.log('距离顶部距离', tabTitTop)
+        that.setData({
+          tabTitTop: tabTitTop
+        })
+      }).exec()
+    }, 400)
     let index = e.currentTarget.dataset.index;
     let dateRangeindex = that.data.dateRangeindex;
     let dateRange = parseInt('' + index + dateRangeindex);
@@ -182,9 +191,18 @@ Page({
     // this.renderChart(dateRange);
     this.renderReport(dateRange);
   },
- 
+
   selectedDateRange: function (e) {
     let that = this;
+    setTimeout(function () {
+      wx.createSelectorQuery().select('.tabTit').boundingClientRect(function (res) {
+        const tabTitTop = res.top;
+        console.log('距离顶部距离', tabTitTop)
+        that.setData({
+          tabTitTop: tabTitTop
+        })
+      }).exec()
+    }, 400)
     let index = e.currentTarget.dataset.index;
     let reportGenreindex = that.data.reportGenreindex;
     let dateRange = parseInt('' + reportGenreindex + index);
@@ -202,7 +220,7 @@ Page({
     // this.renderChart(dateRange);
     this.renderReport(dateRange);
   },
- 
+
   renderTransactionSummation: function (dateRange = 0) {
     let pointReportDate = new Date();
     let pointSummationReportDate = new Date();
@@ -268,17 +286,12 @@ Page({
 
   renderReport: function (dateRange = 0, serchContent = '', pageIndex = 1, pointsData = []) {
     let that = this;
-    let salesVolumeSort = that.data.salesVolumeSort; //排序按销售额为升序
+    let salesVolumeSort = that.data.salesVolumeSort; //默认销售额为升序
     let orderQuantitySort = that.data.orderQuantitySort; //默认订单量升序
     let pageSize = that.data.pageSize;
     let pointTotal = that.data.pointTotal;
     let reportTotal = that.data.reportTotal;
     let reportDetail = that.data.reportDetail;
-
-    this.setData({
-      loadText: '加载中...',
-    })
-
     let data = {
       pageindex: pageIndex,
       pagesize: pageSize,
@@ -312,6 +325,9 @@ Page({
       .then(resp => {
         if (resp.data.code == '200') {
           pointsData = pointsData.concat(resp.data.data.list2);
+          for (const key in pointsData) {
+            pointsData[key].rentalRate =  parseFloat(pointsData[key].rentalRate).toFixed(2)
+          }
           if (pointsData.length <= 0) {
             that.setData({
               isFlag: true
@@ -345,6 +361,9 @@ Page({
             reportDetail: reportDetail
           });
         } else {
+          that.setData({
+            isFlag: false
+          })
           wx.showToast({
             title: resp.data.message,
             duration: 2000,
@@ -510,9 +529,6 @@ Page({
     }
     let pageIndex = 1,
       pointsData = [];
-    that.setData({
-      'push.pullText': '- 上拉加载更多 -',
-    })
     that.renderReport(dateRange, '', pageIndex, pointsData);
   },
 
@@ -558,17 +574,16 @@ Page({
     }
   },
 
-
-  onPageScroll: function (e) {
-    let tabTitTop = that.data.tabTitTop;
-    if (parseInt(e.scrollTop) > tabTitTop) {
-      that.setData({
-        floorstatus: true
-      })
-    } else {
-      that.setData({
-        floorstatus: false
-      })
-    }
-  },
+  // onPageScroll: function (e) {
+  //   let tabTitTop = that.data.tabTitTop + 50;
+  //   if (parseInt(e.scrollTop) > tabTitTop) {
+  //     that.setData({
+  //       floorstatus: true
+  //     })
+  //   } else {
+  //     that.setData({
+  //       floorstatus: false
+  //     })
+  //   }
+  // },
 })

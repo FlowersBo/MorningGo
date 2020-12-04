@@ -8,7 +8,7 @@
     <form bindsubmit="formSubmit">
       <view class="phone-box">
         <text class="phone">手机号：</text>
-        <input name="phoneNumber" type="number" placeholder="请输入手机号" maxlength="11" class="number"
+        <input name="phoneNumber" type="number" placeholder="请输入手机号" maxlength="11" class="number phoneNumber"
           bindinput="bindInputPhoneNumber" />
       </view>
 

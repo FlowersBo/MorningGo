@@ -24,7 +24,7 @@ Page({
         console.log('授权验证', resp);
         if (resp.data.code == 200) {
           wx.switchTab({
-            url: '../user/index',
+            url: '../index/index',
           });
           console.log('登录信息未过期，自动登录');
         }
@@ -189,14 +189,23 @@ Page({
             wx.switchTab({
               url: '../index/index'
             });
-          } else {
+          } else if (resp.data.message) {
             wx.showToast({
               title: resp.data.message,
               icon: 'none',
               duration: 1000
             });
           }
-        });
+        })
+        .catch((rej) => {
+          console.log(rej)
+          wx.showToast({
+            title: '网络错误，请稍后重试',
+            icon: 'none',
+            duration: 1000
+          });
+        })
+
     }
   },
   /**

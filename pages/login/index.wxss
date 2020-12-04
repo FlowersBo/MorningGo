@@ -41,10 +41,13 @@
 
 .number {
   width: 310rpx;
+  height: 100%;
   color: #333;
   font-size: 28rpx;
 }
-
+.phoneNumber{
+  width: 460rpx;
+}
 .getNum {
   width: 150rpx;
   height: 48rpx;

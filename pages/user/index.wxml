@@ -40,7 +40,7 @@
       <view slot='isTitle'>提示</view>
       <view slot='isContent'>您确认要退出登录吗？</view>
     </mask>
-    <view class='plane1' animation="{{slide_up1}}">
+    <!-- <view class='plane1' animation="{{slide_up1}}">
       <image src='/resource/img/plane1.png'></image>
     </view>
     <view class='plane2' animation="{{slide_up2}}">
@@ -48,6 +48,11 @@
     </view>
     <view class='plane3' animation="{{slide_up3}}">
       <image src='/resource/img/plane3.png'></image>
-    </view>
+    </view> -->
   </view>
 </scroll-y>
+
+<!-- <view class="header">
+  <image class="ship" src="../../resource/img/timg.png"></image>
+  <image class="bg_ware" src="https://moyv.top/wechat/images/bg_wave.gif"></image>
+</view> -->

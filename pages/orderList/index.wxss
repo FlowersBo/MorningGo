@@ -1,8 +1,20 @@
 /* pages/orderList/index.wxss */
 /* 日期 */
 .con {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
   display: flex;
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
+  justify-content: space-between;
+  background-image: linear-gradient(90deg, #f8f8f8, #f1f1f1);
+}
+
+.priceNumber{
+  height: 100%;
+  line-height: 80rpx;
+  margin-top: 6rpx;
+  margin-left: 20rpx;
 }
 
 .con .orderDate {

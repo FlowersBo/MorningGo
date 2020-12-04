@@ -75,7 +75,7 @@
   word-break: break-all;
 }
 
-.icon {
+/* .icon {
   color: #63CC0E;
 }
 
@@ -85,9 +85,16 @@
 
 .iconyuanquan1 {
   font-size: 44rpx;
+} */
+
+.equipment_signal{
+  width: 30%;
+  text-align: right;
 }
-
-
+.status_item{
+  display: inline-block;
+  color: #63CC0E;
+}
 .isStatus {
   color: #EE0000;
 }

@@ -160,3 +160,29 @@
   width: 100rpx;
   height: 100rpx;
 }
+
+
+.header {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height:120rpx;
+  background: linear-gradient(to bottom, #f1f1f1, #AACCF9);
+}
+
+.bg_ware {
+  position: absolute;
+  left: 0;
+  bottom: -2rpx;
+  width: 100%;
+  mix-blend-mode: screen;
+  height: 120rpx;
+}
+.ship{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 50%;
+}
